@@ -10,13 +10,13 @@ class CardGame
 
   end
 
-  def deal(num_players=1)
+  def deal(num_players=1, cards_each=5)
     @cards = new_deck(@decks)
     @players = []
 
     num_players.times do |n|
       player_cards = []
-      5.times { player_cards << @cards.pop }
+      cards_each.times { player_cards << @cards.pop }
       @players << Player.new(player_cards)
     end
   end

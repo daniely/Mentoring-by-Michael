@@ -57,5 +57,47 @@ describe CardGame do
     it 'assigns cards randomly' do
       pending "dunno how to test this"
     end
+
+    context "with 4 players" do
+      before(:all) do
+        game1.deal(4)
+      end
+
+      it 'deals cards for 4 players' do
+        game1.players.count.should == 4
+      end
+
+      it 'removes 20 cards from deck (5 cards each for 4 players = 20)' do
+        game1.cards.count.should == 32
+      end
+    end
+
+    context "with 4 players and 10 cards per deal" do
+      before(:all) do
+        game1.deal(4, 10)
+      end
+
+      it 'deals 10 cards per player' do
+        game1.players.each do |player|
+          player.cards.count.should == 10
+        end
+      end
+
+      it 'removes 40 cards from the deck' do
+        game1.cards.count.should == 52 - 40
+      end
+
+      it 'deals to 4 players' do
+        game1.players.count.should == 4
+      end
+    end
+  end
+
+  describe "#display" do
+    it 'shows current state of game' do
+      game1.deal
+      game1.display
+      
+    end
   end
 end
