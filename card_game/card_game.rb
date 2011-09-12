@@ -66,11 +66,7 @@ class Player
   end
 
   def to_s
-    text = @name + ':'
-    @cards.each do |c|
-      text += " #{c} |"
-    end
-    text.chomp(' |')
+    text = @name + ': ' + @cards.join(' | ')
   end
 
   private
