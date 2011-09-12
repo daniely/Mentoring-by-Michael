@@ -12,6 +12,11 @@ describe CardGame do
       game1.cards.count.should == 52
     end
 
+    it 'contains cards like Ac, Ts' do
+      game1.cards.should include('Ac')
+      game1.cards.should include('Ts')
+    end
+
     context 'with optional parameter of 2' do
       let(:game2) { CardGame.new(2) }
       it 'creates 2 decks of cards' do

@@ -3,8 +3,13 @@ class CardGame
 
   def initialize(decks=1)
     self.cards = []
-    (52 * decks).times do
-      cards << 1
+
+    decks.times do
+      %w(A 2 3 4 5 6 7 8 9 T J Q K).each do |rank|
+        %w(c s d h).each do |suit|
+          cards << rank + suit
+        end
+      end
     end
   end
 end
