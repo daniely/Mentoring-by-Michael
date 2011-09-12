@@ -8,7 +8,7 @@ describe CardGame do
       game1.should be
     end
 
-    it 'created a deck of cards' do
+    it 'creates a deck of cards' do
       game1.cards.count.should == 52
     end
 
