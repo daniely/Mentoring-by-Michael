@@ -33,15 +33,8 @@ class CardGame
 
   def deal_cards_to_players(num_players, cards_each)
     num_players.times do |n|
-      player_cards = deal_cards(cards_each)
-      @players << Player.new(n,  player_cards)
+      @players << Player.new( n, @cards.pop(cards_each) )
     end
-  end
-
-  def deal_cards(num)
-    cards = []
-    num.times { cards << @cards.pop }
-    return cards
   end
 
   def shuffled_deck(decks)
