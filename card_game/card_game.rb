@@ -16,9 +16,15 @@ class CardGame
   end
 
   def display
-    @players.each { |player| puts player }
-    puts "Cards used: #{cards_used}"
-    puts "Cards remaining: #{cards_remaining}"
+    puts self.to_s
+  end
+
+  def to_s
+    text = ''
+    @players.each { |player| text += player.to_s + "\n" }
+    text += "Cards used: #{cards_used}\n"
+    text += "Cards remaining: #{cards_remaining}\n"
+    return text
   end
 
   def cards_used
