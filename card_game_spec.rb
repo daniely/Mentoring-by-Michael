@@ -132,7 +132,7 @@ describe CardGame do
   describe "#display" do
     it 'shows current state of game' do
       game1.deal(4, 5)
-      game1.display
+      pending "dunno how to test this"
     end
   end
 end
