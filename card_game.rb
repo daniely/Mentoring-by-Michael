@@ -15,6 +15,20 @@ class CardGame
     deal_cards_to_players(num_players, cards_each)
   end
 
+  def display
+    @players.each { |player| puts player }
+    puts "Cards used: #{cards_used}"
+    puts "Cards remaining: #{cards_remaining}"
+  end
+
+  def cards_used
+    (@decks * 52) - cards_remaining
+  end
+
+  def cards_remaining
+    @cards.count
+  end
+
   private
 
   def deal_cards_to_players(num_players, cards_each)

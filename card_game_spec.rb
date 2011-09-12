@@ -104,10 +104,24 @@ describe CardGame do
     end
   end
 
+  describe "#cards_used" do
+    it 'counts number of cards used' do
+      game1.deal(4, 10)
+      game1.cards_used.should == 4 * 10
+    end
+  end
+
+  describe "#cards_remaining" do
+    it 'counts number of cards remaining in deck' do
+      game1.deal(4, 10)
+      game1.cards_remaining.should == 52 - 40
+    end
+  end
+
   describe "#display" do
     it 'shows current state of game' do
       game1.deal(4, 5)
-      #game1.display
+      game1.display
     end
   end
 end
