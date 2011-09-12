@@ -1,7 +1,7 @@
 require 'ruby-debug'
 
 class CardGame
-  attr_accessor :cards, :players
+  attr_accessor :cards, :players, :decks
 
   def initialize(decks=1)
     @decks = decks
@@ -10,7 +10,7 @@ class CardGame
   end
 
   def deal(num_players=1, cards_each=5)
-    initialize
+    initialize(@decks)
     deal_cards_to_players(num_players, cards_each)
   end
 

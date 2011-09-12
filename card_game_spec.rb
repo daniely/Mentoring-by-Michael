@@ -102,6 +102,17 @@ describe CardGame do
         game1.players.count.should == 4
       end
     end
+
+    context "with 2 decks of cards" do
+      it 'has 104 cards (52 * 2)' do
+        game2.cards.count.should == 104
+      end
+
+      it 'correctly re-initialize with same number of decks' do
+        game2.deal
+        game2.decks.should == 2
+      end
+    end
   end
 
   describe "#cards_used" do
