@@ -130,4 +130,11 @@ describe Player do
   it 'is valid' do
     Player.new(0, 'cards').should be
   end
+
+  describe "#to_s" do
+    it 'shows nicely formatted player info' do
+      player = Player.new(0, %w(Ac 2d Ts 4h Ks))
+      player.to_s.should == "Player 1: Ac | 2d | Ts | 4h | Ks"
+    end
+  end
 end

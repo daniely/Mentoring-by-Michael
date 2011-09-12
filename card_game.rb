@@ -7,7 +7,6 @@ class CardGame
     @decks = decks
     @cards = new_deck(@decks)
     @players = []
-
   end
 
   def deal(num_players=1, cards_each=5)
@@ -64,6 +63,14 @@ class Player
   def initialize(num, cards)
     @name = name_player(num)
     @cards = cards
+  end
+
+  def to_s
+    text = @name + ':'
+    @cards.each do |c|
+      text += " #{c} |"
+    end
+    text.chomp(' |')
   end
 
   private
