@@ -57,8 +57,7 @@ class CardGame
 end
 
 class Player
-  attr_accessor :name
-  attr_accessor :cards
+  attr_accessor :name, :cards
 
   def initialize(num, cards)
     @name = name_player(num)
