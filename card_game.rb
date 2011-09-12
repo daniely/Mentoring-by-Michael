@@ -2,6 +2,7 @@ require 'ruby-debug'
 
 class CardGame
   attr_accessor :cards, :players, :decks
+  CARDS_PER_DECK = 52
 
   def initialize(decks=1)
     @decks = decks
@@ -21,7 +22,7 @@ class CardGame
   end
 
   def cards_used
-    (@decks * 52) - cards_remaining
+    (@decks * CARDS_PER_DECK) - cards_remaining
   end
 
   def cards_remaining

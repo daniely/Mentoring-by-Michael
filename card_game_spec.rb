@@ -3,6 +3,7 @@ require './card_game'
 describe CardGame do
   let(:game1) { CardGame.new }
   let(:game2) { CardGame.new(2) }
+  let(:cards_per_deck) { CardGame::CARDS_PER_DECK }
 
   describe "#new" do
 
@@ -11,7 +12,7 @@ describe CardGame do
     end
 
     it 'creates a deck of cards' do
-      game1.cards.count.should == 52
+      game1.cards.count.should == cards_per_deck
     end
 
     it 'contains cards like Ac, Ts' do
@@ -21,7 +22,7 @@ describe CardGame do
 
     context 'with optional parameter of 2' do
       it 'creates 2 decks of cards' do
-        game2.cards.count.should == 52 * 2
+        game2.cards.count.should == cards_per_deck * 2
       end
     end
   end
@@ -40,7 +41,7 @@ describe CardGame do
     end
 
     it 'lowers count of cards' do
-      game1.cards.count.should == 52 - 5
+      game1.cards.count.should == cards_per_deck - 5
     end
 
     it 'removes played cards from deck' do
@@ -95,7 +96,7 @@ describe CardGame do
       end
 
       it 'removes 40 cards from the deck' do
-        game1.cards.count.should == 52 - 40
+        game1.cards.count.should == cards_per_deck - 40
       end
 
       it 'deals to 4 players' do
@@ -104,7 +105,7 @@ describe CardGame do
     end
 
     context "with 2 decks of cards" do
-      it 'has 104 cards (52 * 2)' do
+      it 'has 104 cards (cards_per_deck * 2)' do
         game2.cards.count.should == 104
       end
 
@@ -125,7 +126,7 @@ describe CardGame do
   describe "#cards_remaining" do
     it 'counts number of cards remaining in deck' do
       game1.deal(4, 10)
-      game1.cards_remaining.should == 52 - 40
+      game1.cards_remaining.should == cards_per_deck - 40
     end
   end
 
