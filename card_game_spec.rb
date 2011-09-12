@@ -115,6 +115,6 @@ end
 
 describe Player do
   it 'is valid' do
-    Player.new('name', 'cards').should be
+    Player.new(0, 'cards').should be
   end
 end

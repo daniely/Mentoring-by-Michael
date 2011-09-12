@@ -11,17 +11,24 @@ class CardGame
   end
 
   def deal(num_players=1, cards_each=5)
-    @cards = new_deck(@decks)
-    @players = []
-
-    num_players.times do |n|
-      player_cards = []
-      cards_each.times { player_cards << @cards.pop }
-      @players << Player.new('Player ' + (n+1).to_s, player_cards)
-    end
+    initialize
+    deal_cards_to_players(num_players, cards_each)
   end
 
   private
+
+  def deal_cards_to_players(num_players, cards_each)
+    num_players.times do |n|
+      player_cards = deal_cards(cards_each)
+      @players << Player.new(n,  player_cards)
+    end
+  end
+
+  def deal_cards(num)
+    cards = []
+    num.times { cards << @cards.pop }
+    return cards
+  end
 
   def new_deck(decks)
     cards = []
@@ -40,8 +47,14 @@ class Player
   attr_accessor :name
   attr_accessor :cards
 
-  def initialize(name, cards)
-    @name = name
+  def initialize(num, cards)
+    @name = name_player(num)
     @cards = cards
+  end
+
+  private
+
+  def name_player(num)
+    'Player ' + (num + 1).to_s
   end
 end
