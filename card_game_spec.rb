@@ -106,9 +106,8 @@ describe CardGame do
 
   describe "#display" do
     it 'shows current state of game' do
-      game1.deal
-      game1.display
-      
+      game1.deal(4, 5)
+      #game1.display
     end
   end
 end
