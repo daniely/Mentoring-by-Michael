@@ -17,7 +17,7 @@ class CardGame
     num_players.times do |n|
       player_cards = []
       cards_each.times { player_cards << @cards.pop }
-      @players << Player.new(player_cards)
+      @players << Player.new('Player ' + (n+1).to_s, player_cards)
     end
   end
 
@@ -37,9 +37,11 @@ class CardGame
 end
 
 class Player
+  attr_accessor :name
   attr_accessor :cards
 
-  def initialize(cards)
+  def initialize(name, cards)
+    @name = name
     @cards = cards
   end
 end

@@ -31,6 +31,10 @@ describe CardGame do
       game1.deal
     end
 
+    it 'names player "Player 1"' do
+      game1.players.first.name.should == 'Player 1'
+    end
+
     it 'involves 1 player' do
       game1.players.count.should == 1
     end
@@ -61,6 +65,13 @@ describe CardGame do
     context "with 4 players" do
       before(:all) do
         game1.deal(4)
+      end
+
+      it 'names each player correctly (Player 1, Player2, etc)' do
+        game1.players[0].name.should == 'Player 1'
+        game1.players[1].name.should == 'Player 2'
+        game1.players[2].name.should == 'Player 3'
+        game1.players[3].name.should == 'Player 4'
       end
 
       it 'deals cards for 4 players' do
@@ -99,5 +110,11 @@ describe CardGame do
       game1.display
       
     end
+  end
+end
+
+describe Player do
+  it 'is valid' do
+    Player.new('name', 'cards').should be
   end
 end
