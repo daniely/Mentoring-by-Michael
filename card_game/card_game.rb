@@ -6,7 +6,7 @@ class CardGame
 
   def initialize(decks=1)
     @decks = decks
-    @cards = new_deck(@decks)
+    @cards = shuffled_deck(@decks)
     @players = []
   end
 
@@ -44,7 +44,7 @@ class CardGame
     return cards
   end
 
-  def new_deck(decks)
+  def shuffled_deck(decks)
     cards = []
     decks.times do
       %w(A 2 3 4 5 6 7 8 9 T J Q K).each do |rank|
