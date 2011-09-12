@@ -60,7 +60,10 @@ describe CardGame do
     end
 
     it 'assigns cards randomly' do
-      pending "dunno how to test this"
+      game_x = CardGame.new
+      game_x.deal
+
+      game_x.players.first.cards.should_not == game1.players.first.cards
     end
 
     context "with 4 players" do
