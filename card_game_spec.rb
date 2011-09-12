@@ -48,6 +48,12 @@ describe CardGame do
       game1.players.first.class.should == Player
     end
 
+    it 'resets players cards for each deal' do
+      old_players_cards = game1.players.first.cards
+      game1.deal
+      game1.players.first.cards.should_not == old_players_cards
+    end
+
     it 'assigns cards randomly' do
       pending "dunno how to test this"
     end
