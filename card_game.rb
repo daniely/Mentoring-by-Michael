@@ -1,9 +1,9 @@
 class CardGame
   attr_accessor :cards
 
-  def initialize
+  def initialize(decks=1)
     self.cards = []
-    52.times do
+    (52 * decks).times do
       cards << 1
     end
   end
