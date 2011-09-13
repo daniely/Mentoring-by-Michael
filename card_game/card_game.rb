@@ -18,19 +18,19 @@ class CardGame
   end
 
   def to_s
-    text = ''
-    @players.each { |player| text += player.to_s + "\n" }
-    text += "Cards used: #{cards_used}\n"
-    text += "Cards remaining: #{cards_remaining}\n"
-    return text
+    text = []
+    self.players.each { |player| text << "#{player}" }
+    text << "Cards used: #{cards_used}"
+    text << "Cards remaining: #{cards_remaining}"
+    return text.join("\n")
   end
 
   def cards_used
-    (@decks * CARDS_PER_DECK) - cards_remaining
+    (self.decks * CARDS_PER_DECK) - cards_remaining
   end
 
   def cards_remaining
-    @cards.count
+    self.cards.count
   end
 
   private
@@ -42,7 +42,7 @@ class CardGame
 
   def deal_cards_to_players(num_players, cards_each)
     num_players.times do |n|
-      @players << Player.new( n, @cards.pop(cards_each) )
+      self.players << Player.new( n, self.cards.pop(cards_each) )
     end
   end
 
@@ -63,17 +63,17 @@ class Player
   attr_accessor :name, :cards
 
   def initialize(num, cards)
-    @name = name_player(num)
-    @cards = cards
+    self.name = name_player(num)
+    self.cards = cards
   end
 
   def to_s
-    text = @name + ': ' + @cards.join(' | ')
+    "#{self.name}: #{self.cards.join(' | ')}"
   end
 
   private
 
   def name_player(num)
-    'Player ' + (num + 1).to_s
+    "Player #{num.next}"
   end
 end
