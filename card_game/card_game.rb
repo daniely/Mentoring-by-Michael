@@ -47,15 +47,12 @@ class CardGame
   end
 
   def shuffled_deck(decks)
-    cards = []
-    decks.times do
-      %w(A 2 3 4 5 6 7 8 9 T J Q K).each do |rank|
-        %w(c s d h).each do |suit|
-          cards << rank + suit
-        end
-      end
-    end
-    return cards.shuffle!
+    rank = %w(A 2 3 4 5 6 7 8 9 T J Q K)
+    suit = %w(c s d h)
+    cards = rank.product(suit).map{ |c| c.join }
+    cards = cards * decks
+
+    cards.shuffle!
   end
 end
 
