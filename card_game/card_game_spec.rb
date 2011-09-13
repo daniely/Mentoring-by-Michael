@@ -11,25 +11,19 @@ describe CardGame do
       game1.should be
     end
 
-    it 'creates a deck of cards' do
-      game1.cards.count.should == cards_per_deck
-    end
-
-    it 'contains cards like Ac, Ts' do
-      game1.cards.should include('Ac')
-      game1.cards.should include('Ts')
-    end
-
-    context 'with optional parameter of 2' do
-      it 'creates 2 decks of cards' do
-        game2.cards.count.should == cards_per_deck * 2
-      end
-    end
   end
 
   describe "#deal" do
     before(:all) do
       game1.deal
+    end
+
+    it 'creates a deck of cards' do
+      game1.cards.should be
+    end
+
+    it 'contains cards like Ac, Ts' do
+      game1.cards.first.length.should == 2
     end
 
     it 'names player "Player 1"' do
@@ -64,6 +58,13 @@ describe CardGame do
       game_x.deal
 
       game_x.players.first.cards.should_not == game1.players.first.cards
+    end
+
+    context 'with optional parameter of 2' do
+      it 'creates 2 decks of cards' do
+        game2.deal
+        game2.cards.count.should == cards_per_deck * 2 - 5
+      end
     end
 
     context "with 4 players" do
@@ -109,7 +110,8 @@ describe CardGame do
 
     context "with 2 decks of cards" do
       it 'has 104 cards (cards_per_deck * 2)' do
-        game2.cards.count.should == 104
+        game2.deal
+        game2.cards.count.should == cards_per_deck * 2 - 5
       end
 
       it 'correctly re-initialize with same number of decks' do

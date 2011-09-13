@@ -5,13 +5,11 @@ class CardGame
   CARDS_PER_DECK = 52
 
   def initialize(decks=1)
-    @decks = decks
-    @cards = shuffled_deck(@decks)
-    @players = []
+    self.decks = decks
   end
 
   def deal(num_players=1, cards_each=5)
-    initialize(@decks)
+    reset_game
     deal_cards_to_players(num_players, cards_each)
   end
 
@@ -36,6 +34,11 @@ class CardGame
   end
 
   private
+
+  def reset_game
+    self.players = []
+    self.cards = shuffled_deck(self.decks)
+  end
 
   def deal_cards_to_players(num_players, cards_each)
     num_players.times do |n|
