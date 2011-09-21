@@ -17,8 +17,7 @@ class BookUtils
     isbn_a = isbn_a[0..-2]
 
     # alternate n + n*3
-    alt = isbn_a.each_with_index \
-                .inject(0){ |sum, (n,i)| sum += i.next % 2 ? n : n*3 }
+    alt = alternately_mult(isbn_a)
 
     # result % 10
     alt = alt % 10
