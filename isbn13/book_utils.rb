@@ -16,14 +16,8 @@ class BookUtils
     # ignore last digit
     isbn_a = isbn_a[0..-2]
 
-    # alternate n + n*3
-    alt = alternately_mult(isbn_a)
-
-    # result % 10
-    alt = alt % 10
-
-    # 10 - result
-    alt = 10 - alt
+    # 10 - (x1 + 3 * x2, + x3 + 3 * x4) % 10
+    10 - alternately_mult(isbn_a) % 10
   end
 
   def self.alternately_mult(sample)
