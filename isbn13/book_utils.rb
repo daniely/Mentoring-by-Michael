@@ -7,6 +7,19 @@ class BookUtils
   end
 
   def self.check_digit(isbn)
+    cleaned_isbn = clean_isbn(isbn)
+
+    # 10 - (x1 + 3 * x2, + x3 + 3 * x4) % 10
+    10 - alternately_mult(cleaned_isbn) % 10
+  end
+
+  def self.alternately_mult(sample)
+    sample.each_with_index.inject(0){ |sum, (n,i)| sum += i % 2 == 0 ? n : n*3 }
+  end
+
+  private
+
+  def self.clean_isbn(isbn)
     # remove non-digits
     isbn.gsub!('-','')
 
@@ -14,13 +27,6 @@ class BookUtils
     isbn_a = isbn.split('').map{ |n| n.to_i }
 
     # ignore last digit
-    isbn_a = isbn_a[0..-2]
-
-    # 10 - (x1 + 3 * x2, + x3 + 3 * x4) % 10
-    10 - alternately_mult(isbn_a) % 10
-  end
-
-  def self.alternately_mult(sample)
-    sample.each_with_index.inject(0){ |sum, (n,i)| sum += i % 2 == 0 ? n : n*3 }
+    isbn_a[0..-2]
   end
 end
