@@ -15,4 +15,12 @@ describe BookUtils do
       BookUtils.valid_isbn13?('9780552145438').should be_false
     end
   end
+
+  describe "#alternately_mult" do
+    it 'correctly calculate for 1234' do
+      sample = [1, 2, 3, 4]
+      result = BookUtils.alternately_mult(sample)
+      result.should == 1 + 2*3 + 3 + 3*4
+    end
+  end
 end
