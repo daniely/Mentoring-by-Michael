@@ -26,4 +26,8 @@ class BookUtils
     # 10 - result
     alt = 10 - alt
   end
+
+  def self.alternately_mult(sample)
+    sample.each_with_index.inject(0){ |sum, (n,i)| sum += i % 2 == 0 ? n : n*3 }
+  end
 end
