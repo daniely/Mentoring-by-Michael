@@ -14,14 +14,14 @@ class ImageEditor
       @image = []
       width = commands.shift.to_i
       height = commands.shift.to_i
-      height.times do
-        @image << Marshal::load(Marshal.dump(DEFAULT_COLOR * width))
-      end
+
+      height.times { @image << Marshal::load(Marshal.dump(DEFAULT_COLOR * width)) }
     when "V"
       x = commands.shift.to_i
       y1 = commands.shift.to_i
       y2 = commands.shift.to_i
       color = commands.shift
+
       (y1..y2).each do |y|
         @image[y-1][x-1] = color
       end
@@ -30,6 +30,7 @@ class ImageEditor
       x2 = commands.shift.to_i
       y = commands.shift.to_i
       color = commands.shift
+
       (x1..x2).each do |x|
         @image[y-1][x-1] = color
       end
@@ -37,6 +38,7 @@ class ImageEditor
       x = commands.shift.to_i
       y = commands.shift.to_i
       color = commands.shift
+
       @image[y-1][x-1] = color
     when "C"
       execute("I #{@image.first.size} #{@image.size}")
