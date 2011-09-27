@@ -29,7 +29,6 @@ EOS
 
     describe "L 2 3 A" do
       it 'colors a single pixel' do
-        
         image = <<-EOS
 OOOOO
 OOOOO
@@ -38,9 +37,40 @@ OOOOO
 OOOOO
 OOOOO
 EOS
-
         ie.execute("I 5 6")
         ie.execute("L 2 3 A")
+        ie.execute("S").should == image.chomp
+      end
+    end
+
+    describe "V 2 3 4 W" do
+      it 'colors a single pixel' do
+        image = <<-EOS
+OOOOO
+OOOOO
+OWOOO
+OWOOO
+OOOOO
+OOOOO
+EOS
+        ie.execute("I 5 6")
+        ie.execute("V 2 3 4 W")
+        ie.execute("S").should == image.chomp
+      end
+    end
+
+    describe "H 3 4 2 Z" do
+      it 'colors a single pixel' do
+        image = <<-EOS
+OOOOO
+OOZZO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+EOS
+        ie.execute("I 5 6")
+        ie.execute("H 3 4 2 Z")
         ie.execute("S").should == image.chomp
       end
     end
