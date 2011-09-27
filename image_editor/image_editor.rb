@@ -18,6 +18,8 @@ class ImageEditor
       width = commands.shift.to_i
       height = commands.shift.to_i
       @image = [DEFAULT_COLOR * width] * height
+    when "S"
+      @image.join("\n")
     end
   end
 end

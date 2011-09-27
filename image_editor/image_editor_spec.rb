@@ -11,5 +11,20 @@ describe ImageEditor do
         ie.image.size.should == 6
       end
     end
+
+    describe "S" do
+      it 'shows image' do
+        image = <<-EOS
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+EOS
+        ie.execute("I 5 6")
+        ie.execute("S").should == image.chomp
+      end
+    end
   end
 end
