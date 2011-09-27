@@ -5,16 +5,13 @@ class ImageEditor
 
   attr_reader :image
 
-  def initialize
-    @image = []
-  end
-
   def execute(input)
     commands = input.split
     command = commands.shift
 
     case command
     when "I"
+      @image = []
       width = commands.shift.to_i
       height = commands.shift.to_i
       height.times do
@@ -41,6 +38,8 @@ class ImageEditor
       y = commands.shift.to_i
       color = commands.shift
       @image[y-1][x-1] = color
+    when "C"
+      execute("I #{@image.first.size} #{@image.size}")
     when "S"
       @image.join("\n")
     end

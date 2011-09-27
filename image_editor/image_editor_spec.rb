@@ -1,12 +1,17 @@
 require './image_editor'
 
 describe ImageEditor do
+  it 'validate grid size'
+
   describe "commands" do
     let(:ie) { ImageEditor.new }
 
+    before(:each) do
+      ie.execute("I 5 6")
+    end
+
     describe "I 5 6" do
       it 'creates a new MxN image' do
-        ie.execute("I 5 6")
         ie.image.first.size.should == 5
         ie.image.size.should == 6
       end
@@ -22,7 +27,6 @@ OOOOO
 OOOOO
 OOOOO
 EOS
-        ie.execute("I 5 6")
         ie.execute("S").should == image.chomp
       end
     end
@@ -37,14 +41,13 @@ OOOOO
 OOOOO
 OOOOO
 EOS
-        ie.execute("I 5 6")
         ie.execute("L 2 3 A")
         ie.execute("S").should == image.chomp
       end
     end
 
     describe "V 2 3 4 W" do
-      it 'colors a single pixel' do
+      it 'colors a vertical section' do
         image = <<-EOS
 OOOOO
 OOOOO
@@ -53,14 +56,13 @@ OWOOO
 OOOOO
 OOOOO
 EOS
-        ie.execute("I 5 6")
         ie.execute("V 2 3 4 W")
         ie.execute("S").should == image.chomp
       end
     end
 
     describe "H 3 4 2 Z" do
-      it 'colors a single pixel' do
+      it 'colors a horizontal section' do
         image = <<-EOS
 OOOOO
 OOZZO
@@ -69,8 +71,23 @@ OOOOO
 OOOOO
 OOOOO
 EOS
-        ie.execute("I 5 6")
         ie.execute("H 3 4 2 Z")
+        ie.execute("S").should == image.chomp
+      end
+    end
+
+    describe "C" do
+      it 'resets image' do
+        image = <<-EOS
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+EOS
+        ie.execute("L 2 3 A")
+        ie.execute("C")
         ie.execute("S").should == image.chomp
       end
     end
