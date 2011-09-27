@@ -15,7 +15,7 @@ class ImageEditor
       width = commands.shift.to_i
       height = commands.shift.to_i
 
-      height.times { @image << Marshal::load(Marshal.dump(DEFAULT_COLOR * width)) }
+      height.times { @image << ['O'] * width }
     when "V"
       x = commands.shift.to_i
       y1 = commands.shift.to_i
@@ -43,7 +43,7 @@ class ImageEditor
     when "C"
       execute("I #{@image.first.size} #{@image.size}")
     when "S"
-      @image.join("\n")
+      @image.map!{ |a| a.join }.join("\n")
     end
   end
 end
