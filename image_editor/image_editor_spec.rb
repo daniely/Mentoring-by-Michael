@@ -26,5 +26,23 @@ EOS
         ie.execute("S").should == image.chomp
       end
     end
+
+    describe "L 2 3 A" do
+      it 'colors a single pixel' do
+        
+        image = <<-EOS
+OOOOO
+OOOOO
+OAOOO
+OOOOO
+OOOOO
+OOOOO
+EOS
+
+        ie.execute("I 5 6")
+        ie.execute("L 2 3 A")
+        ie.execute("S").should == image.chomp
+      end
+    end
   end
 end
