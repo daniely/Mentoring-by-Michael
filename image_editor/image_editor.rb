@@ -7,9 +7,8 @@ class ImageEditor
 
   def execute(input)
     commands = input.split
-    command = commands.shift
 
-    case command
+    case commands.shift
     when "I"
       @image = []
       width = commands.shift.to_i
