@@ -76,6 +76,21 @@ describe ImageEditor do
       end
     end
 
+    describe "F 3 3 J" do
+      it 'fills a region' do
+        image = <<-EOS
+                JJJJJ
+                JJJJJ
+                JJJJJ
+                JJJJJ
+                JJJJJ
+                JJJJJ
+                EOS
+        ie.execute("F 3 3 J")
+        ie.execute("S").should == image.gsub(' ','').chomp
+      end
+    end
+
     describe "C" do
       it 'resets image' do
         image = <<-EOS
