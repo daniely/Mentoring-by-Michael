@@ -46,7 +46,7 @@ class ImageEditor
       new_color = commands.shift
       old_color = @image[y][x]
 
-      fill_coords(0, 0, old_color, new_color)
+      fill_coords(x, y, old_color, new_color)
     when "C"
       execute("I #{@image.first.size} #{@image.size}")
     when "S"
@@ -59,22 +59,22 @@ class ImageEditor
   #   is adjacent point within range?
   #     no, remove it
   #   diff and within range, then change color
-  def fill_coords(y, x, old_color, new_color, marked_coords=[])
-    if marked_coords.include?([y, x])
+  def fill_coords(x, y, old_color, new_color, marked_coords=[])
+    if marked_coords.include?([x, y])
       return
     else
-      marked_coords << [y, x]
+      marked_coords << [x, y]
     end
 
     execute("L #{x.next} #{y.next} #{new_color}")
 
     # get valid adjacent pts
-    adjacent_coords = [y-1, y+1].product([x]) + [y].product([x-1, x+1])
-    adjacent_coords.delete_if{ |c| c[0] < 0 || c[1] < 0 }
-    adjacent_coords.delete_if{ |c| c[0] > 5 || c[1] > 5 }
+    adjacent_coords = [x-1, x+1].product([y]) + [x].product([y-1, y+1])
+    adjacent_coords.delete_if{ |c| c.first < 0 || c.last < 0 }
+    adjacent_coords.delete_if{ |c| c.first > @image.first.size - 1 || c.last > @image.size - 1 }
 
     # remove if color doesn't match
-    adjacent_coords.delete_if{ |c| @image[c.first][c.last] != old_color }
+    adjacent_coords.delete_if{ |c| @image[c.last][c.first] != old_color }
 
     # delete if color already changed
     adjacent_coords = adjacent_coords - marked_coords
