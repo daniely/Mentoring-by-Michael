@@ -20,75 +20,75 @@ describe ImageEditor do
     describe "S" do
       it 'shows image' do
         image = <<-EOS
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-EOS
-        ie.execute("S").should == image.chomp
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                EOS
+        ie.execute("S").should == image.gsub(' ', '').chomp
       end
     end
 
     describe "L 2 3 A" do
       it 'colors a single pixel' do
         image = <<-EOS
-OOOOO
-OOOOO
-OAOOO
-OOOOO
-OOOOO
-OOOOO
-EOS
+                OOOOO
+                OOOOO
+                OAOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                EOS
         ie.execute("L 2 3 A")
-        ie.execute("S").should == image.chomp
+        ie.execute("S").should == image.gsub(' ','').chomp
       end
     end
 
     describe "V 2 3 4 W" do
       it 'colors a vertical section' do
         image = <<-EOS
-OOOOO
-OOOOO
-OWOOO
-OWOOO
-OOOOO
-OOOOO
-EOS
+                OOOOO
+                OOOOO
+                OWOOO
+                OWOOO
+                OOOOO
+                OOOOO
+                EOS
         ie.execute("V 2 3 4 W")
-        ie.execute("S").should == image.chomp
+        ie.execute("S").should == image.gsub(' ','').chomp
       end
     end
 
     describe "H 3 4 2 Z" do
       it 'colors a horizontal section' do
         image = <<-EOS
-OOOOO
-OOZZO
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-EOS
+                OOOOO
+                OOZZO
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                EOS
         ie.execute("H 3 4 2 Z")
-        ie.execute("S").should == image.chomp
+        ie.execute("S").should == image.gsub(' ','').chomp
       end
     end
 
     describe "C" do
       it 'resets image' do
         image = <<-EOS
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-OOOOO
-EOS
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                OOOOO
+                EOS
         ie.execute("L 2 3 A")
         ie.execute("C")
-        ie.execute("S").should == image.chomp
+        ie.execute("S").should == image.gsub(' ','').chomp
       end
     end
   end
