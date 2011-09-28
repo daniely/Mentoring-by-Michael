@@ -46,7 +46,7 @@ class ImageEditor
       new_color = commands.shift
       old_color = @image[y][x]
 
-      fill_coords(x, y, old_color, new_color)
+      fill(x, y, old_color, new_color)
     when "C"
       execute("I #{@image.first.size} #{@image.size}")
     when "S"
@@ -54,12 +54,7 @@ class ImageEditor
     end
   end
 
-  # change pixel color
-  # check if adjacent is diff color
-  #   is adjacent point within range?
-  #     no, remove it
-  #   diff and within range, then change color
-  def fill_coords(x, y, old_color, new_color, marked_coords=[])
+  def fill(x, y, old_color, new_color, marked_coords=[])
     if marked_coords.include?([x, y])
       return
     else
@@ -76,9 +71,6 @@ class ImageEditor
     # remove if color doesn't match
     adjacent_coords.delete_if{ |c| @image[c.last][c.first] != old_color }
 
-    # delete if color already changed
-    adjacent_coords = adjacent_coords - marked_coords
-
-    adjacent_coords.each { |a| fill_coords(*a, old_color, new_color, marked_coords) }
+    adjacent_coords.each { |a| fill(*a, old_color, new_color, marked_coords) }
   end
 end
