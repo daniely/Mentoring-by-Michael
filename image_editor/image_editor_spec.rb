@@ -91,6 +91,22 @@ describe ImageEditor do
       end
     end
 
+    describe "F 3 3 J with half already colored" do
+      it 'colors the right half' do
+        image = <<-EOS
+                OWJJJ
+                OWJJJ
+                OWJJJ
+                OWJJJ
+                OWJJJ
+                OWJJJ
+                EOS
+        ie.execute("V 2 1 6 W")
+        ie.execute("F 3 3 J")
+        ie.execute("S").should == image.gsub(' ','').chomp
+      end
+    end
+
     describe "C" do
       it 'resets image' do
         image = <<-EOS
