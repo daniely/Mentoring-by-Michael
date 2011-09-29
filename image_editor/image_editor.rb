@@ -66,13 +66,7 @@ class ImageEditor
     end
   end
 
-  def fill(x, y, old_color, new_color, marked_coords=[])
-    if marked_coords.include?([x, y])
-      return
-    else
-      marked_coords << [x, y]
-    end
-
+  def fill(x, y, old_color, new_color)
     execute("L #{x.next} #{y.next} #{new_color}")
 
     # get valid adjacent pts
@@ -83,6 +77,6 @@ class ImageEditor
     # remove if color doesn't match
     adjacent_coords.delete_if{ |c| @image[c.last][c.first] != old_color }
 
-    adjacent_coords.each { |a| fill(*a, old_color, new_color, marked_coords) }
+    adjacent_coords.each { |a| fill(*a, old_color, new_color) }
   end
 end
