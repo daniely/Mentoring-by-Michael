@@ -67,6 +67,9 @@ class ImageEditor
   end
 
   def fill(x, y, old_color, new_color)
+    # exit if already colored
+    return if @image[y][x] == new_color
+
     execute("L #{x.next} #{y.next} #{new_color}")
 
     # get valid adjacent pts
