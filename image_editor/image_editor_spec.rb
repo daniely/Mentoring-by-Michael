@@ -42,7 +42,7 @@ describe ImageEditor do
                 OOOOO
                 EOS
         ie.execute("L 2 3 A")
-        ie.execute("S").should == image.gsub(' ','').chomp
+        ie.to_s.should == image.gsub(' ','').chomp
       end
     end
 
@@ -57,7 +57,7 @@ describe ImageEditor do
                 OOOOO
                 EOS
         ie.execute("V 2 3 4 W")
-        ie.execute("S").should == image.gsub(' ','').chomp
+        ie.to_s.should == image.gsub(' ','').chomp
       end
     end
 
@@ -72,7 +72,7 @@ describe ImageEditor do
                 OOOOO
                 EOS
         ie.execute("H 3 4 2 Z")
-        ie.execute("S").should == image.gsub(' ','').chomp
+        ie.to_s.should == image.gsub(' ','').chomp
       end
     end
 
@@ -87,7 +87,7 @@ describe ImageEditor do
                 JJJJJ
                 EOS
         ie.execute("F 3 3 J")
-        ie.execute("S").should == image.gsub(' ','').chomp
+        ie.to_s.should == image.gsub(' ','').chomp
       end
     end
 
@@ -103,7 +103,7 @@ describe ImageEditor do
                 EOS
         ie.execute("V 2 1 6 W")
         ie.execute("F 3 3 J")
-        ie.execute("S").should == image.gsub(' ','').chomp
+        ie.to_s.should == image.gsub(' ','').chomp
       end
     end
 
@@ -119,7 +119,7 @@ describe ImageEditor do
                 EOS
         ie.execute("L 2 3 A")
         ie.execute("C")
-        ie.execute("S").should == image.gsub(' ','').chomp
+        ie.to_s.should == image.gsub(' ','').chomp
       end
     end
   end

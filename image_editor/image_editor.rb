@@ -5,6 +5,10 @@ class ImageEditor
 
   attr_reader :image
 
+  def to_s
+    @image.map{ |i| i.join }.join("\n")
+  end
+
   def execute(input)
     commands = input.split
 
@@ -49,7 +53,7 @@ class ImageEditor
     when "C"
       execute("I #{@image.first.size} #{@image.size}")
     when "S"
-      @image.map!{ |a| a.join }.join("\n")
+      to_s
     end
   end
 
