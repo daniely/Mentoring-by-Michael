@@ -1,8 +1,6 @@
 require './image_editor'
 
 describe ImageEditor do
-  it 'validate grid size'
-
   describe "commands" do
     let(:output) { double('output').as_null_object }
     let(:ie) { ImageEditor.new(output) }
@@ -122,6 +120,35 @@ describe ImageEditor do
         ie.execute("L 2 3 A")
         ie.execute("C")
         ie.to_s.should == image.gsub(' ','').chomp
+      end
+    end
+
+    context "command input validation" do
+      describe "image that is too big" do
+        it 'width must be <= 250' do
+          too_small = ImageEditor.new(output)
+          output.should_receive(:puts).with("Image must be 1 <= m,n <= 250")
+          too_small.execute("I 251 3")
+        end
+
+        it 'height must be <= 250' do
+          too_small = ImageEditor.new(output)
+          output.should_receive(:puts).with("Image must be 1 <= m,n <= 250")
+          too_small.execute("I 3 251")
+        end
+      end
+      describe "image that is too small" do
+        it 'width must be >= 1' do
+          too_small = ImageEditor.new(output)
+          output.should_receive(:puts).with("Image must be 1 <= m,n <= 250")
+          too_small.execute("I -1 3")
+        end
+
+        it 'height must be >= 1' do
+          too_small = ImageEditor.new(output)
+          output.should_receive(:puts).with("Image must be 1 <= m,n <= 250")
+          too_small.execute("I 3 -1")
+        end
       end
     end
   end

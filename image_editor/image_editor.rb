@@ -18,10 +18,15 @@ class ImageEditor
 
     case commands.shift
     when "I"
-      @image = []
       width = commands.shift.to_i
       height = commands.shift.to_i
 
+      if width < 1 || height < 1 || width > 250 || height > 250
+        @output.puts "Image must be 1 <= m,n <= 250" 
+        return
+      end
+
+      @image = []
       height.times { @image << ['O'] * width }
     when "V"
       x = commands.shift.to_i
