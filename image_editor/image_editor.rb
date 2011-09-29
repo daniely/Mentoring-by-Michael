@@ -63,6 +63,8 @@ class ImageEditor
       execute("I #{@image.first.size} #{@image.size}")
     when "S"
       @output.puts to_s
+    else
+      @output.puts "Bad command. Please try again."
     end
   end
 
