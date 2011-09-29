@@ -3,7 +3,11 @@ require 'ruby-debug'
 class ImageEditor
   DEFAULT_COLOR = 'O'
 
-  attr_reader :image
+  attr_reader :image, :output
+
+  def initialize(output=STDOUT)
+    @output = output
+  end
 
   def to_s
     @image.map{ |i| i.join }.join("\n")
@@ -53,7 +57,7 @@ class ImageEditor
     when "C"
       execute("I #{@image.first.size} #{@image.size}")
     when "S"
-      to_s
+      @output.puts to_s
     end
   end
 

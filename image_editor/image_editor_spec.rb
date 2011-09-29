@@ -4,7 +4,8 @@ describe ImageEditor do
   it 'validate grid size'
 
   describe "commands" do
-    let(:ie) { ImageEditor.new }
+    let(:output) { double('output').as_null_object }
+    let(:ie) { ImageEditor.new(output) }
 
     before(:each) do
       ie.execute("I 5 6")
@@ -27,7 +28,8 @@ describe ImageEditor do
                 OOOOO
                 OOOOO
                 EOS
-        ie.execute("S").should == image.gsub(' ', '').chomp
+        output.should_receive(:puts).with(image.gsub(' ', '').chomp)
+        ie.execute("S")
       end
     end
 
