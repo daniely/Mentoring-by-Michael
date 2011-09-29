@@ -34,18 +34,14 @@ class ImageEditor
       y2 = commands.shift.to_i
       color = commands.shift
 
-      (y1..y2).each do |y|
-        @image[y-1][x-1] = color
-      end
+      (y1..y2).each { |y| @image[y-1][x-1] = color }
     when "H"
       x1 = commands.shift.to_i
       x2 = commands.shift.to_i
       y = commands.shift.to_i
       color = commands.shift
 
-      (x1..x2).each do |x|
-        @image[y-1][x-1] = color
-      end
+      (x1..x2).each { |x| @image[y-1][x-1] = color }
     when "L"
       x = commands.shift.to_i
       y = commands.shift.to_i
