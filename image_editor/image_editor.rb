@@ -27,7 +27,7 @@ class ImageEditor
       end
 
       @image = []
-      height.times { @image << ['O'] * width }
+      height.times { @image << [DEFAULT_COLOR] * width }
     when "V"
       x = commands.shift.to_i
       y1 = commands.shift.to_i
