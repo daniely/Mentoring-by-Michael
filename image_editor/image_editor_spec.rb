@@ -1,7 +1,7 @@
 require './image_editor'
 
 describe ImageEditor do
-  describe "commands" do
+  describe "execute" do
     let(:output) { double('output').as_null_object }
     let(:ie) { ImageEditor.new(output) }
 
