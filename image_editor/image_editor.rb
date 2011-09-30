@@ -14,12 +14,12 @@ class ImageEditor
   end
 
   def execute(input)
-    commands = input.split
+    input = input.split
 
-    case commands.shift
+    case input.shift
     when "I"
-      width = commands.shift.to_i
-      height = commands.shift.to_i
+      width = input.shift.to_i
+      height = input.shift.to_i
 
       if width < 1 || height < 1 || width > 250 || height > 250
         @output.puts "Image must be 1 <= m,n <= 250" 
@@ -29,29 +29,29 @@ class ImageEditor
       @image = []
       height.times { @image << [DEFAULT_COLOR] * width }
     when "V"
-      x = commands.shift.to_i
-      y1 = commands.shift.to_i
-      y2 = commands.shift.to_i
-      color = commands.shift
+      x = input.shift.to_i
+      y1 = input.shift.to_i
+      y2 = input.shift.to_i
+      color = input.shift
 
       (y1..y2).each { |y| @image[y-1][x-1] = color }
     when "H"
-      x1 = commands.shift.to_i
-      x2 = commands.shift.to_i
-      y = commands.shift.to_i
-      color = commands.shift
+      x1 = input.shift.to_i
+      x2 = input.shift.to_i
+      y = input.shift.to_i
+      color = input.shift
 
       (x1..x2).each { |x| @image[y-1][x-1] = color }
     when "L"
-      x = commands.shift.to_i
-      y = commands.shift.to_i
-      color = commands.shift
+      x = input.shift.to_i
+      y = input.shift.to_i
+      color = input.shift
 
       @image[y-1][x-1] = color
     when "F"
-      x = commands.shift.to_i
-      y = commands.shift.to_i
-      new_color = commands.shift
+      x = input.shift.to_i
+      y = input.shift.to_i
+      new_color = input.shift
       old_color = @image[y][x]
 
       fill(x, y, old_color, new_color)
