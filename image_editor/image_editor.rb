@@ -75,7 +75,7 @@ class ImageEditor
     adjacent_coords.delete_if{ |c| c.first < 0 || c.last < 0 }
     adjacent_coords.delete_if{ |c| c.first > @image.first.size - 1 || c.last > @image.size - 1 }
 
-    # remove if color doesn't match
+    # only fill if color is the same
     adjacent_coords.delete_if{ |c| @image[c.last][c.first] != old_color }
 
     adjacent_coords.each { |a| fill(*a, old_color, new_color) }
