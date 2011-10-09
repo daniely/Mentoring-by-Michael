@@ -45,8 +45,8 @@ def biggest_subarray(ar)
 
   1.upto(ar.size) do |i|
     ar.each_cons(i) do |a|
-      max = a.inject(:+)
-      max_answer = [max, a] if max_answer.empty? || max >= max_answer.first
+      sum = a.inject(:+)
+      max_answer = [sum, a] if max_answer.empty? || sum >= max_answer.first
     end
   end
 
