@@ -39,7 +39,7 @@ describe "#biggest_subarray" do
 end
 
 def biggest_subarray(ar)
-  raise "need at least one negative value" if ar.reject{ |a| a < 0 }.empty?
+  raise "need at least one positive value" if ar.count{ |a| a > 0 }.zero?
 
   max_answer = []
 
