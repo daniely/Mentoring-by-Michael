@@ -1,5 +1,35 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__) 
+require 'optparse'
 require 'shift_subtitle'
 
-STDOUT.puts 'hello'
+options = {}
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: shift_subtitle [options] input_file output_file"
+
+  options[:operation] = ''
+  opts.on('-o', '--operation name', 'add or sub time') do |op|
+    unless %w(add sub).include?(op)
+      STDOUT.puts "valid options for '--operation' are 'add' or 'sub'"
+      exit
+    end
+
+    options[:operation] = op
+  end
+
+  options[:time] = 0
+  opts.on('-t', '--time amount', 'amount of time to shift by') do |time|
+    options[:time] = time.sub(',','.').to_f * 1000
+    options[:time] = -options[:time] if(options[:operation] == "sub")
+  end
+
+  opts.on('-h', '--help') do
+    STDOUT.puts opts
+    exit
+  end
+end
+
+optparse.parse!
+input, output = ARGV
+
+ShiftSubtitle.new(input, output, options[:time]).shift_file

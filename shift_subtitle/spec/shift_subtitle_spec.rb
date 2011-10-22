@@ -22,8 +22,6 @@ In connection with a dramatic increase
 in crime in certain neighbourhoods,
 EOS
 
-# shift_subtitle --operation add --time 02,110 input_file output_file
-
 describe ShiftSubtitle do
   describe "#shift" do
     it 'shifts 01:31:51,210' do
@@ -39,6 +37,13 @@ describe ShiftSubtitle do
     it 'outputs shifted subs' do
       amount = 2500
       ShiftSubtitle::shift_stream(sample_subs, amount).should == shifted
+    end
+  end
+
+  describe "optparse" do
+    it 'do this' do
+      command = "shift_subtitle --operation sub --time 02,500 subs.srt output_file"
+      system("bin/#{command}")
     end
   end
 end
