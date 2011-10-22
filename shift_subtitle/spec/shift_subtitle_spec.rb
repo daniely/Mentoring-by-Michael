@@ -40,10 +40,10 @@ describe ShiftSubtitle do
     end
   end
 
-  describe "optparse" do
-    it 'do this' do
-      command = "shift_subtitle --operation sub --time 02,500 subs.srt output_file"
-      system("bin/#{command}")
-    end
-  end
+  #describe "command line" do
+    #it 'executes command line app' do
+      #command = "shift_subtitle --operation sub --time 02,500 subs.srt output_file"
+      #system("bin/#{command}")
+    #end
+  #end
 end
