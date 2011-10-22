@@ -1,9 +1,25 @@
 require 'time'
 require 'ruby-debug'
 
-module ShiftSubtitle
+class ShiftSubtitle
+  attr_reader :subs_file, :new_file, :amount
+
+  def initialize(subs_file, new_file, amount)
+    @subs_file = subs_file
+    @new_file = new_file
+    @amount = amount
+  end
+
+  def shift_file
+    file_text = ''
+    File.open(subs_file, 'r'){ |f| file_text = f.read }
+    shifted_text = ShiftSubtitle::shift_stream(file_text, amount)
+
+    File.open(new_file, 'w'){ |f| f.write shifted_text }
+  end
+
   def self.shift_stream(stream, amount)
-    result = ''
+    result = []
 
     stream.each_line do |line|
       if line.match(/\d{2}:\d{2}:\d{2},\d{2}/)
@@ -14,7 +30,7 @@ module ShiftSubtitle
       end
     end
 
-    result
+    result.join
   end
 
   def self.shift(time, amount)
