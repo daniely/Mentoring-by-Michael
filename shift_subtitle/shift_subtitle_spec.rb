@@ -13,12 +13,14 @@ EOS
 
 # shift_subtitle --operation add --time 02,110 input_file output_file
 
-describe "#test1" do
-  it 'understand optsparse' do
-    ShiftSubtitle::shift("01:31:51,210", 2500).should == "01:31:53,710"
-  end
+describe ShiftSubtitle do
+  describe "#shift" do
+    it 'shifts 01:31:51,210' do
+      ShiftSubtitle::shift("01:31:51,210", 2500).should == "01:31:53,710"
+    end
 
-  it 'understand optsparse' do
-    ShiftSubtitle::shift("01:32:07,769", 2500).should == "01:32:10,269"
+    it 'shifts 01:32:07,769' do
+      ShiftSubtitle::shift("01:32:07,769", 2500).should == "01:32:10,269"
+    end
   end
 end
