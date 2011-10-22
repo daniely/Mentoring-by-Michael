@@ -1,4 +1,4 @@
-require './shift_subtitle'
+require 'spec_helper'
 
 sample_subs =<<-EOS
 645
