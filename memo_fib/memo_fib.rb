@@ -1,7 +1,5 @@
 require 'ruby-debug'
 
-# keep a hash of fib sequences
-# {0:1, 1:1, 2:2...}
 class Fib
   attr_accessor :memo
 
