@@ -1,21 +1,17 @@
 require 'ruby-debug'
 
 class FibFun
+  # init the first two fib values
+  define_singleton_method("fib_0") { 0 }
+  define_singleton_method("fib_1") { 1 }
+
   def self.method_missing(meth, *args)
     num = meth.to_s.match(/fib_(\d)*/)[1]
 
-    if num
-      num = num.to_i
-    else
-      raise "fib_x - where x must be an integer"
-    end
+    num = Integer(num) rescue raise("fib_x - where x must be an integer")
 
-    define_singleton_method( "fib_" + num.to_s) do
-      if num == 0 || num == 1
-        num
-      else
-        send("fib_" + (num-1).to_s) + send("fib_" + (num-2).to_s)
-      end
+    define_singleton_method( "fib_#{num}") do
+      send("fib_#{num-1}") + send("fib_#{num-2}")
     end
 
     # call itself again
