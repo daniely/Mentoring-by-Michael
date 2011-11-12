@@ -1,24 +1,19 @@
 require 'ruby-debug'
 
 class FibFun
-  def method_missing(meth, *args)
-    num = meth.to_s.split('_').last.to_i
+  def self.method_missing(meth, *args)
+    num = meth.to_s.match(/fib_(\d)*/)[1]
 
-    # get list of fib_x methods
-    fib_methods = []
-    self.methods.each { |m| fib_methods << m if m.match(/fib_\d*/) }
-
-    # get last fib_x method and calculate the rest
-    last_fib_method = fib_methods.last
-    debugger
-
-    # compute from lowest to highest for all uncalculated fib sequences
-    if num == 0 || num == 1
-      self.class.send(:define_method, "fib_" + num.to_s) do
-        num
-      end
+    if num
+      num = num.to_i
     else
-      self.class.send(:define_method, "fib_" + num.to_s) do
+      raise "fib_x - where x must be an integer"
+    end
+
+    define_singleton_method( "fib_" + num.to_s) do
+      if num == 0 || num == 1
+        num
+      else
         send("fib_" + (num-1).to_s) + send("fib_" + (num-2).to_s)
       end
     end
@@ -26,55 +21,44 @@ class FibFun
     # call itself again
     send(meth)
   end
-
-  def fib(i)
-    unless memo.include?(i)
-      # compute from lowest to highest for all uncalculated fib sequences
-      self.memo.size.upto(i) { |n| compute_fib(n) }
-    end
-
-    self.memo[i]
-  end
-
-  def compute_fib(i)
-    if i == 0 || i == 1
-      i
-    else
-      send("fib_" + (i-1).to_s) + send("fib_" + (i-2).to_s)
-    end
-  end
 end
 
 describe FibFun do
-  let(:f) { FibFun.new }
+  describe "Fib.fib_f" do
+    it 'raises error' do
+      expect do
+        FibFun.fib_f
+      end.should raise_error
+    end
+  end
 
-  describe "fib(0)" do
+  describe "Fib.fib_0" do
     it 'return 0' do
-      f.fib_0.should == 0
+      FibFun.fib_0.should == 0
     end
   end
 
-  describe "fib(1)" do
+  describe "Fib.fib_1" do
     it 'return 1' do
-      f.fib_1.should == 1
+      FibFun.fib_1.should == 1
     end
   end
 
-  #describe "fib(2)" do
-    #it 'return 1' do
-      #f.fib(2).should == 1
-    #end
-  #end
+  describe "FibFun.fib_2" do
+    it 'return 1' do
+      FibFun.fib_2.should == 1
+    end
+  end
 
-  #describe "fib(3)" do
-    #it 'return 2' do
-      #f.fib(3).should == 2
-    #end
-  #end
+  describe "FibFun.fib_3" do
+    it 'return 2' do
+      FibFun.fib_3.should == 2
+    end
+  end
 
-  #describe "fib(6)" do
-    #it 'return 8' do
-      #f.fib(6).should == 8
-    #end
-  #end
+  describe "FibFun.fib_6" do
+    it 'return 8' do
+      FibFun.fib_6.should == 8
+    end
+  end
 end
