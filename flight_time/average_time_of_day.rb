@@ -29,4 +29,15 @@ describe "average_time_of_day" do
     @arrival_time = "10pm"
     average_time_of_day(["6:41am", "6:51am", "7:01am"]).should == "6:51am"
   end
+
+  it '10:33pm' do
+    @arrival_time = "10pm"
+    average_time_of_day(["10:20pm", "10:30pm", "10:50pm"]).should == "10:33pm"
+  end
+
+  it '6:33am' do
+    @arrival_time = "10pm"
+    average_time_of_day(["10:20am", "10:30am", "10:50pm"]).should == "6:33am"
+  end
+
 end
