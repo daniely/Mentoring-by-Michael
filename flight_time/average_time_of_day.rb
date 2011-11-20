@@ -1,7 +1,7 @@
 require 'ruby-debug'
 require 'time'
 
-SECS_PER_DAY = 24 * 60 * 60
+DAY_IN_SECONDS = 24 * 60 * 60
 
 def average_time_of_day(times)
   # sum diff of each from arrival_time
@@ -12,16 +12,21 @@ def average_time_of_day(times)
 
   avg_time_diff = times.map! do |t|
     i_time = Time.parse(t)
-    i_time += SECS_PER_DAY unless t.match(meridian)
+    i_time += DAY_IN_SECONDS unless t.match(meridian)
     i_time - Time.parse(@arrival_time)
   end.inject(:+) / times.size
 
-  Time.parse(@arrival_time) + avg_time_diff
+  (Time.parse(@arrival_time) + avg_time_diff).strftime('%l:%M%p').strip.downcase
 end
 
 describe "average_time_of_day" do
-  it 'calculate avg arrival time' do
+  it '12:01am' do
     @arrival_time = "10pm"
     average_time_of_day(["11:51pm", "11:56pm", "12:01am", "12:06am", "12:11am"]).should == "12:01am"
+  end
+
+  it '6:51am' do
+    @arrival_time = "10pm"
+    average_time_of_day(["6:41am", "6:51am", "7:01am"]).should == "6:51am"
   end
 end
