@@ -110,5 +110,7 @@ class ImageEditor
 
     command = input.shift
     commands[command.downcase].call(self, input)
+  rescue NoMethodError => ex
+    puts "Sorry, command #{command} does not exist"
   end
 end
